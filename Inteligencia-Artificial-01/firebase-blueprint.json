@@ -1,0 +1,28 @@
+{
+  "entities": {
+    "Star": {
+      "title": "Star Configuration",
+      "description": "A saved star configuration for the JoJo Star app.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "description": "The UID of the user who saved the star." },
+        "type": { "type": "integer", "description": "Number of points." },
+        "quantity": { "type": "integer", "description": "Number of stars." },
+        "effect": { "type": "integer", "description": "Glow effect (0-100)." },
+        "color": { "type": "string", "description": "Hex color code." },
+        "innerRadius": { "type": "integer", "description": "Inner radius (0-100)." },
+        "hasFill": { "type": "boolean", "description": "Whether the star has a fill." },
+        "rotationSpeed": { "type": "integer", "description": "Rotation speed (0-4)." },
+        "is3D": { "type": "boolean", "description": "Whether the star is in 3D perspective." },
+        "createdAt": { "type": "string", "format": "date-time", "description": "When the star was saved." }
+      },
+      "required": ["userId", "type", "quantity", "effect", "color", "innerRadius", "hasFill", "rotationSpeed", "is3D", "createdAt"]
+    }
+  },
+  "firestore": {
+    "stars/{starId}": {
+      "schema": "Star",
+      "description": "Collection of saved stars."
+    }
+  }
+}

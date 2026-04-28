@@ -1,0 +1,67 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // ===============================================================
+    // Assumed Data Model
+    // ===============================================================
+    //
+    // Collection: stars
+    // Document ID: auto-generated
+    // Fields:
+    //   - userId: string (required) - The UID of the user who saved the star.
+    //   - type: int (required) - Number of points (3-24).
+    //   - quantity: int (required) - Number of stars (1-10).
+    //   - effect: int (required) - Glow effect (0-100).
+    //   - color: string (required) - Hex color code.
+    //   - innerRadius: int (required) - Inner radius (5-80).
+    //   - hasFill: bool (required) - Whether the star has a fill.
+    //   - rotationSpeed: int (required) - Rotation speed (0-4).
+    //   - is3D: bool (required) - Whether the star is in 3D perspective.
+    //   - createdAt: string (required) - ISO 8601 date string.
+    //
+    // ===============================================================
+
+    // ===============================================================
+    // Helper Functions
+    // ===============================================================
+    
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+
+    function hasRequiredFields(fields) {
+      return request.resource.data.keys().hasAll(fields);
+    }
+
+    function hasOnlyAllowedFields(fields) {
+      return request.resource.data.keys().hasOnly(fields);
+    }
+
+    // Domain Validators
+    function isValidStar(data) {
+      return hasRequiredFields(['userId', 'type', 'quantity', 'effect', 'color', 'innerRadius', 'hasFill', 'rotationSpeed', 'is3D', 'createdAt']) &&
+             hasOnlyAllowedFields(['userId', 'type', 'quantity', 'effect', 'color', 'innerRadius', 'hasFill', 'rotationSpeed', 'is3D', 'createdAt']) &&
+             data.userId == request.auth.uid &&
+             data.type is int && data.type >= 3 && data.type <= 24 &&
+             data.quantity is int && data.quantity >= 1 && data.quantity <= 10 &&
+             data.effect is int && data.effect >= 0 && data.effect <= 100 &&
+             data.color is string && data.color.matches("^#[0-9A-Fa-f]{6}$") &&
+             data.innerRadius is int && data.innerRadius >= 5 && data.innerRadius <= 80 &&
+             data.hasFill is bool &&
+             data.rotationSpeed is int && data.rotationSpeed >= 0 && data.rotationSpeed <= 4 &&
+             data.is3D is bool &&
+             data.createdAt is string;
+    }
+
+    match /stars/{starId} {
+      allow read: if isAuthenticated() && resource.data.userId == request.auth.uid;
+      allow create: if isAuthenticated() && isValidStar(request.resource.data);
+      allow delete: if isAuthenticated() && resource.data.userId == request.auth.uid;
+      allow update: if false; // Stars are immutable once saved
+    }
+  }
+}
