@@ -1,4 +1,4 @@
-# .Felipe De Assis Lima
+# Felipe De Assis Lima
 > Estudante de Analise e desenvolvimento de sistemas
  
 ---
@@ -36,16 +36,22 @@ Atualmente cursando o 2º período de Analise e desenvolvimento de sistemas na U
  
 ### 📂 Portfólio de Projetos
  
-#### 🗃️ Modelagem de Banco de Dados
+#### 🗃️ Data Science
 | Projeto | Descrição | Link |
 | :--- | :--- | :---: |
-| **Sistema de Gestão Escolar** | Modelagem ER e Scripts SQL para uma instituição de ensino. | [Ver Projeto](./projeto-banco-dados/) |
+| **Aplicação interativa** | uma aplicação interativa construída com Streamlit para analisar os jogadores selecionados para o NBA All-Star Game entre os anos de 2000 e 2016. | [Ver Projeto](https://github.com/falwrld/NBA-ALL-STAR) |
+| **Sistema Analise de RH** | dashboard interativo criado com Python + Streamlit, que permite analisar dados de funcionários a partir de um arquivo Excel (.xlsx). | [Ver Projeto](https://github.com/falwrld/AnaliseRH) |
+ 
  
 #### 🤖 Inteligência Artificial
 | Projeto | Descrição | Link |
 | :--- | :--- | :---: |
-| **Predição de Churn** | Algoritmo de classificação para prever saída de clientes. | [Ver Projeto](./projeto-ia-churn/) |
- 
+| **Gerador de Marcas Estelares** |ferramenta autoral de design generativo que permite criar, personalizar e catalogar formas estelares complexas. | [Ver Projeto](https://github.com/falwrld/Jojo-Star-v1) |
+
+ #### ⚙️ Automação & Backend
+| Projeto | Descrição | Link |
+| :--- | :--- | :---: |
+| **Monitor FTP** | Automação em Python para monitoramento contínuo de servidores FTP corporativos. Detecta novos arquivos em múltiplos diretórios, envia alertas por e-mail, gera relatórios Excel com histórico, e mantém logs de auditoria append-only para rastreabilidade operacional. | Privado |
 ---
  
 ### 🏗 Estrutura do Repositório
